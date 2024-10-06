@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 3px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+
+        input[type="text"],
+        textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        button {
+            background-color: #28a745; /* Green color */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px; /* Adjust the width as needed */
+        }
+        .card h2 {
+            margin-top: 0;
+        }
+        .card p {
+            color: #555;
+        }
+        .card a {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #007BFF; /* Bootstrap primary color */
+        }
+        .card a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h1>Blog Posts</h1>
+
+<form action="/create" method="POST">
+    <input type="text" name="title" placeholder="Post Title" required>
+    <br><br>
+    <textarea name="content" placeholder="Post Content" required></textarea>
+    <br><br>
+    <button type="submit">Create Post</button>
+    <br><br>
+</form>
+<br><br>
+<div class="container">
+    {% for post in posts %}
+    <div class="card">
+        <h2>{{ post['title'] }}</h2>
+        <p>{{ post['content'] }}</p>
+        <a href="{{ url_for('edit_post', post_id=post['id']) }}">Edit</a>
+        <br>
+        <a href="{{ url_for('delete_post', post_id=post['id']) }}">Delete</a>
+    </div>
+    {% endfor %}
+</div>
+
+</body>
+</html>

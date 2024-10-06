@@ -1,0 +1,3 @@
+Hello, Python using Project IDX
+Example of file handling in Python.
+Neon in pink with black.
